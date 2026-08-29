@@ -12,7 +12,7 @@
   </head>
   <body>
     <?php
-      require_once __DIR__ . '/Public/autoload.php';
+      require_once BASE_PATH . '/Public/autoload.php';
 
       use App\Core\Router;
 

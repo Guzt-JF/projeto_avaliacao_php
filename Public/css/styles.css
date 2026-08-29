@@ -5,6 +5,71 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Roboto';
+  src: url('../lib/fonts/Roboto-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.panel_main_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.panel_div{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  width: 310px;
+  height: 175px;
+} 
+
+.panel_title{
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-size: 20px;
+
+}
+
+.panel_input{
+  margin-bottom: 15px;
+  width: 290px;
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 3px;
+  font-size: 14px;
+  padding: 0px 7px;
+}
+
+.panel_buttons{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.panel_button{
+  background:black;
+  border:none;
+  color: white;
+  width: 100px;
+  height: 30px;
+}
+
+.panel_a{
+  font-size: 12px;
 }

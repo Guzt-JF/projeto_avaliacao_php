@@ -39,7 +39,7 @@ class Router {
       $controller->$method();
     } catch (Exception $e) {
       $erro = $e->getMessage();
-      require_once __DIR__ . '/../../Public/404.php';
+      require_once BASE_PATH . '/Public/404.php';
     }
   }
 }
