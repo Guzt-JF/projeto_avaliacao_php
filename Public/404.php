@@ -1,0 +1,1 @@
+Erro ao abrir pagina - <?= isset($erro) ? $erro : 'Erro Desconhecido' ?>
