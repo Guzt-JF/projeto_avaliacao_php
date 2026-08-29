@@ -1,9 +1,14 @@
+<?php 
+  define('BASE_PATH', __DIR__ . '/');
+  define('BASE_URL', rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\'));
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
     <meta charset="utf-8">
     <title>Projeto Avaliação</title>
-    <link rel="stylesheet" href="Public/css/main.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/Public/css/styles.css">
   </head>
   <body>
     <?php
@@ -13,6 +18,6 @@
 
       $router = new Router();
     ?>
-    <script src="public/lib/jquery-4.0.0.min"></script>
+    <script src="<?= BASE_URL ?>/Public/lib/jquery-4.0.0.min.js"></script>
   </body>
 </html>
