@@ -1,0 +1,90 @@
+.panel_main_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.panel_div{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  width: 295px;
+  height: 175px;
+} 
+
+.panel_title{
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.panel_input_container{
+  margin-top: 10px;
+  width: 294px;
+  min-height: 30px;
+  border: 1px solid black;
+  border-radius: 3px;
+  display: flex;
+}
+
+.panel_error_container {
+  border: 1px solid red;
+}
+
+.panel_input{
+  padding: 0px 7px;
+  width: 100%;
+  font-size: 14px;
+  height: 100%;
+  border: none;
+  border-radius: 3px;
+}
+
+.panel_show_button {
+  min-width: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  border: none;
+}
+
+.panel_loading_span{
+  min-width: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  border: none;
+}
+
+.panel_buttons{
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.panel_button{
+  background:black;
+  border:none;
+  color: white;
+  width: 100px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.panel_a{
+  font-size: 12px;
+}
+
+.panel_error_span{
+  color: red;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}

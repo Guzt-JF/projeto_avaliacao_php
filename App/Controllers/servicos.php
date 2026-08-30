@@ -12,6 +12,7 @@ class Servicos extends Controller
   }
   public function cadastro()
   {
+    echo $this->checkAndReturnStylesheet('auth', 'panel');
     $this->view('servicos/cadastro');
   }
 }

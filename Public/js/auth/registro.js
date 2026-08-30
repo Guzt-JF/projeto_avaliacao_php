@@ -1,5 +1,5 @@
 $(document).ready(()=>{
-  $('#panel_sign_in').on('click',async function(){
+  $('#panel_sign_up').on('click' ,async function(){
     try{
       const input_verify = verifyInputs();
 
@@ -7,14 +7,15 @@ $(document).ready(()=>{
         return;
       }
 
-      startLoadingInput('panel_sign_in')
+      startLoadingInput('panel_sign_up')
 
       const formData = new FormData();
 
+      formData.append('username', $('#panel_username_input').val());
       formData.append('email', $('#panel_email_input').val());
       formData.append('password', $('#panel_password_input').val());
 
-      const response = await fetch(`${window.BASE_URL}/auth/signin`, {
+      const response = await fetch(`${window.BASE_URL}/auth/signup`, {
         method: 'POST',
         body: formData
       });
@@ -29,7 +30,7 @@ $(document).ready(()=>{
     }
     catch(err){
       showToast(err.message, true);
-      stopLoadingInput('panel_sign_in')
+      stopLoadingInput('panel_sign_up')
       return;
     }
   });
@@ -41,6 +42,10 @@ $(document).ready(()=>{
   $('#panel_pass_show').on('click', function(){
     showPassword()
   });
+
+  $("#panel_username_input").on('change, keydown',function(){
+    cleanInput('username');
+  })
 
   $("#panel_email_input").on('change, keydown',function(){
     cleanInput('email');
