@@ -12,7 +12,6 @@
     <script src="<?= BASE_URL ?>/Public/js/function.js"></script>
     <script>
       window.BASE_URL = `<?= BASE_URL ?>`;
-      console.log(window.BASE_URL);
     </script>
     <?= isset($script) ? $script : '' ?>
   </body>

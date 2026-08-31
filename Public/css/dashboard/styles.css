@@ -57,12 +57,19 @@
   display: flex;
   gap:10px;
   padding-top: 10px;
+  align-items: end;
 }
 
-.filter_inputs input{
+.filter_inputs input,
+.filter_inputs select{
   padding: 5px 7px;
   border-radius: 3px;
   border: 1px solid black;
+  height: 28px;
+}
+
+#filter_status{
+  width: 130px;
 }
 
 .filter_inputs button{
@@ -72,6 +79,7 @@
   background:#595959;
   color: white;
   width: 100px;
+  height: 28px;
 }
 
 .table_container{
@@ -80,7 +88,7 @@
   margin-top: 15px;
   height: 100vh;
   overflow: auto;
-  
+  position: relative;
 }
 
 .dashboard_table{
@@ -102,4 +110,77 @@
 .dashboard_table th, .dashboard_table td{
   padding: 5px 10px;
   text-align: start;
+}
+
+.input_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.input_container label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.loading_container{
+  background: #a4a4a4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 30px);
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  z-index: 1;
+}
+
+.loading{
+  width: 60px !important;
+  height: 60px !important;
+  border: 8px solid #ddd !important;
+  border-top-color: #333 !important;
+}
+
+#span_total {
+  margin-top: 10px;
+  gap: 4px;
+  display: flex;
+}
+
+#span_total span{
+  line-height: 23px;
+  font-size: 17px;
+}
+
+.row_buttons{
+  display: flex;
+  gap:5px;
+}
+
+.row_buttons button{
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  border-radius: 3px;
+}
+
+.row_buttons button:disabled {
+  filter: brightness(80%) grayscale(30%);
+  cursor: auto;
+}
+
+.edit_container {
+  display: grid;
+  grid-template-columns: 250px 120px;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.edit_container input,
+.edit_container select{
+  padding: 2px;
+  border-radius: 3px;
+  border: 1px solid black;
 }

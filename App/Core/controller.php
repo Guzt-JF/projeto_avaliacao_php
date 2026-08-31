@@ -50,7 +50,7 @@ class Controller
 
   public function verifyMethod(string $method){
     if ($_SERVER['REQUEST_METHOD'] !== $method) {
-      $this->jsonResponse(['erro' => 1,'msg' => 'Método não permitido','data' => []],405);
+      $this->jsonResponse(['erro' => 1, 'msg' => 'Método não permitido', 'data' => []],405);
     }
 
     return true;

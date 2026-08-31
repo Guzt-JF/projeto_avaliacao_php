@@ -22,9 +22,14 @@ body {
   box-sizing: border-box;
 }
 
+button{
+  cursor: pointer;
+}
+
 .d-none{
   display: none !important;
 }
+
 
 .loading {
   width: 19px;
@@ -35,13 +40,21 @@ body {
   animation: spin 0.8s linear infinite;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+.general_loading{
+  z-index: 99;
+  background: #0000003b;
+  position: absolute;
+  top: 0px;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+
 .toast {
+  z-index: 100;
   color: white;
   position: fixed;
   bottom: 20px;
@@ -52,6 +65,7 @@ body {
   opacity: 0;
   transition: opacity 0.3s;
 }
+
 .toast_error {
   background: #a21414 !important;
 }
@@ -62,6 +76,90 @@ body {
 
 .toast_error.shake {
   animation: toast-shake 0.3s ease-in-out;
+}
+
+.modal_background {
+  background: #0000003b;
+  position: absolute;
+  top: 0px;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: white;
+  min-width: 350px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 15px 5px rgba(0,0,0,0.1);
+  border: 1px solid black;
+}
+
+.modal_header {
+  height: 30px;
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+}
+
+.modal_header button{
+  background: red;
+  border: none;
+  width: 18px;
+  height: 18px;
+  font-size: 14px;
+  color: white;
+  border-radius: 3px;
+}
+
+.modal_content {
+  display: flex;
+  height: fit-content;
+  justify-content: start;
+  align-items: start;
+  padding: 10px;
+}
+
+.modal_footer{
+  border-top: 1px solid black;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  gap: 10px;
+}
+
+.modal_buttons{
+  padding: 5px 10px;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  font-size: 14px;
+}
+
+.modal_confirm_button{
+ background: #1d8240;
+}
+
+.modal_cancel_button{
+  background: red;
+}
+
+
+.grid_item_full {
+  grid-column: 1 / -1;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes toast-shake {

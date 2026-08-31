@@ -23,10 +23,10 @@ class Auth extends Controller
 
     $user_model = $this->model('user');
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    $password = filter_input(INPUT_POST, 'password');
+    $password = $_POST['password'];
 
     if (!$email || !$password) {
-      $this->jsonResponse(['erro' => 1, 'msg' => 'Email ou senha inválidos', 'data' => []]);
+      $this->jsonResponse(['erro' => 1, 'msg' => 'Ops, Email ou Senha inválido', 'data' => []]);
     }
 
     $returned_user = $user_model->getByEmail([
@@ -46,8 +46,12 @@ class Auth extends Controller
         !password_verify($params['pasword'], $user_data['password'])
       )
     ){
-      $this->jsonResponse(['erro' => 1, 'msg' => 'Email ou senha inválidos', 'data' => []]);
+      $this->jsonResponse(['erro' => 1, 'msg' => 'Ops, Email ou Senha inválido', 'data' => []]);
     }
+    
+    $_SESSION['username'] = $user_data["name"];
+    $_SESSION['id_user']  = $user_data["id_user"];
+    $_SESSION['email']    = $user_data["email"];
 
     $this->jsonResponse(['erro' => 0, 'msg' => 'Sucesso ao logar', 'data' => $user_data]);
   }
@@ -56,9 +60,9 @@ class Auth extends Controller
     $this->verifyMethod('POST');
 
     $user_model = $this->model('user');
-    $username = filter_input(INPUT_POST, 'username');
+    $username = $_POST['username'];
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    $password = filter_input(INPUT_POST, 'password');
+    $password = $_POST['password'];
 
     if (!$email || !$password || !$username) {
       $this->jsonResponse([
