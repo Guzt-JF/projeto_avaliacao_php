@@ -34,24 +34,6 @@ function showToast(message, error = false) {
   });
 }
 
-function openModal(title, message){
-  const random_id = Math.floor(Math.random() * 999999);
-
-  $('body').append(
-    `<div class="modal_background" id="modal_bg_${random_id}">
-      <div id="modal_${random_id}" class="modal">
-        <div class="modal_header">
-          <strong>${title}</strong>
-          <button id="close_modal_button_${random_id}">X</button>
-        </div>
-        ${message}
-      </div>
-    </div>
-  `);
-
-  return random_id;
-}
-
 function confirmModal(title, message, response = ()=>{}, reject = ()=>{}){
   const random_id = Math.floor(Math.random() * 999999);
 

@@ -34,17 +34,19 @@
             </button>
           </div>
         </td>
-        <td id="row_id_<?= $id ?>">
+        <td>
           <?= str_pad($id , 7, '0', STR_PAD_LEFT) ?>
         </td>
-        <td id="row_description_<?= $id ?>"><?= $serv["description"] ?></td>
-        <td id="row_status_<?= $id ?>" data-real_value="<?= $status ? 2 : 1 ?>">
+        <td>
+          <?= $serv["description"] ?>
+        </td>
+        <td>
           <?= $status ? 'FINALIZADO' : 'PENDENTE' ?>
         </td>
-        <td id="row_price_<?= $id ?>" data-real_value="<?= $serv["price"] ?>">
+        <td>
           R$ <?= number_format($serv["price"], 2, ',', '.') ?>
         </td>
-        <td id="row_user_<?= $id ?>">
+        <td>
           <?= $serv["user_name"] ?>
         </td>
       </tr>

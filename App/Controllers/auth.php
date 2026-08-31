@@ -18,7 +18,7 @@ class Auth extends Controller
     echo $this->checkAndReturnScript('auth', 'function');
   }
 
-  public function signin() {
+  public function sign_in() {
     $this->verifyMethod('POST');
 
     $user_model = $this->model('user');
@@ -56,7 +56,7 @@ class Auth extends Controller
     $this->jsonResponse(['erro' => 0, 'msg' => 'Sucesso ao logar', 'data' => $user_data]);
   }
 
-  public function signup() {
+  public function sign_up() {
     $this->verifyMethod('POST');
 
     $user_model = $this->model('user');

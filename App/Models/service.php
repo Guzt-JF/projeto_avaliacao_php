@@ -7,13 +7,18 @@ use Throwable;
 
 class Service extends Database
 {
-  public function getAll(array $params){
+  public function get(array $params){
     try{
       $binds = [];
 
       $sql = "SELECT s.*, u.name as user_name FROM service s
         INNER JOIN user u ON u.id_user = s.user_id_user
         WHERE 1=1";
+
+      if(isset($params['id']) && !empty($params['id'])){
+        $sql .= " AND s.id_service = :id";
+        $binds[':id'] = $params['id']; 
+      }
 
       if(isset($params['description']) && !empty($params['description'])){
         $sql .= " AND LOWER(s.description) LIKE LOWER(:description)";

@@ -7,36 +7,6 @@ use Throwable;
 
 class User extends Database
 {
-  public function getAll(array $params){
-    try{
-      $binds = [];
-
-      $sql = "SELECT id_user, name, email, created_at, update_at, ativo FROM user WHERE 1=1";
-
-      if(isset($params['id']) && !empty($params['id'])){
-        $sql .= " AND id_user = :id";
-        $binds[':id'] = $params['id']; 
-      }
-      if(isset($params['email']) && !empty($params['email'])){
-        $sql .= " AND email = :email";
-        $binds[':email'] = $params['email']; 
-      }
-
-      $query = $this->conn->prepare($sql);
-
-      foreach($binds as $key => $bind){
-        $query->bindValue($key, $bind);
-      }
-      
-      $query->execute();
-      $usuario = $query->fetchAll(PDO::FETCH_ASSOC);
-
-      return ['erro' => 0, 'msg' => 'Sucesso ao retornar dados', 'data' => $usuario];
-    }
-    catch(Throwable $err){
-      return ['erro' => 1, 'msg' => 'Erro ao retornar dados - '.$err->getMessage(), 'data' => []];
-    }
-  }
   public function getByEmail(array $params){
     try{
       $binds = [];

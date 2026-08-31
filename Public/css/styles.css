@@ -151,7 +151,6 @@ button{
   background: red;
 }
 
-
 .grid_item_full {
   grid-column: 1 / -1;
 }

@@ -10,6 +10,7 @@ class Servicos extends Controller
   public function index(){
     $this->cadastro();
   }
+
   public function cadastro(){
     if(!isset($_SESSION['id_user']) || empty($_SESSION['id_user'])){
       header("Location: ".BASE_URL."/auth");
@@ -40,7 +41,7 @@ class Servicos extends Controller
       }
     }
 
-    $servicos = $service -> getAll([
+    $servicos = $service -> get([
       'username'    => $username,
       'description' => $description,
       'status'      => $status,

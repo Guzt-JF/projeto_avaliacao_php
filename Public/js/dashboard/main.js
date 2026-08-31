@@ -7,36 +7,27 @@ $(document).ready(async function(){
 
   $('body').on('click', '.row_edit_button', async function(){
     const serv_id = $(this).data('id');
+      showGeneralLoading();
 
-    const price = Number($(`#row_price_${serv_id}`).data('real_value')).toLocaleString('pt-BR', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
+    const response = await fetch(`${window.BASE_URL}/dashboard/modal_edit?id=${serv_id}`, {
+      method: 'GET',
     });
-    const description = $(`#row_description_${serv_id}`).html();
 
-    const modalId = openModal(
-      `Editar Serviço N° ${serv_id}`,`
-        <div class="modal_content">
-          <div class="edit_container">
-            <div class="input_container">
-              <label>Descrição:</label>
-              <input type="text" id="edit_descricao" value="${description}">
-            </div>
-            <div class="input_container">
-              <label>Valor:</label>
-              <input type="text" id="edit_total" value="${price}">
-            </div>
-          </div>
-        </div>
-        <div class="modal_footer">
-          <button id="modal_cancel_button" class="modal_cancel_button modal_buttons">Cancelar</button>
-          <button id="modal_confirm_button" class="modal_confirm_button modal_buttons">Confirmar</button>
-        </div>
-      `);
+    const modal_edit = await response.json();
+
+    if(modal_edit.erro){
+      showToast(modal_edit.msg, true);
+      return;
+    }
+    
+    $('body').append(modal_edit.data);
+    
+    hideGeneralLoading();
 
     $('#modal_confirm_button').on('click', async function(){
       const new_description = $('#edit_descricao').val();
       const new_price = $('#edit_total').val();
+
       if(new_description.trim() == ''){
         showToast("A descrição do produto está vazia", true);
         return;
@@ -50,7 +41,8 @@ $(document).ready(async function(){
         return;
       }
 
-      $(`#modal_bg_${modalId}`).remove();
+      $(`#modal_bg`).remove();
+
       showGeneralLoading();
 
       const formData = new FormData();
@@ -71,9 +63,10 @@ $(document).ready(async function(){
       await filterServices();
     });
     
-    $('#modal_cancel_button').on('click', async function(){
-      $(`#modal_bg_${modalId}`).remove();
+    $('#modal_cancel_button, #close_modal_button').on('click', async function(){
+      $(`#modal_bg`).remove();
     });
+
   })
 
   $('body').on('click', '.row_delete_button', async function(){
@@ -170,7 +163,7 @@ async function filterServices(){
 
 async function updateHeaderData(){
   try{
-    const response = await fetch(`${window.BASE_URL}/dashboard/getHeaderData`, {
+    const response = await fetch(`${window.BASE_URL}/dashboard/get_header_data`, {
       method: 'GET'
     });
 

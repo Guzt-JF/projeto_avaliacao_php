@@ -15,7 +15,7 @@ $(document).ready(()=>{
       formData.append('email', $('#panel_email_input').val());
       formData.append('password', $('#panel_password_input').val());
 
-      const response = await fetch(`${window.BASE_URL}/auth/signup`, {
+      const response = await fetch(`${window.BASE_URL}/auth/sign_up`, {
         method: 'POST',
         body: formData
       });
