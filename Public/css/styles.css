@@ -22,8 +22,12 @@ body {
   box-sizing: border-box;
 }
 
-button{
+button, select{
   cursor: pointer;
+}
+
+input {
+  cursor: text;
 }
 
 .d-none{
@@ -153,6 +157,15 @@ button{
 
 .grid_item_full {
   grid-column: 1 / -1;
+}
+
+.error_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  font-size: 20px;
 }
 
 @keyframes spin {

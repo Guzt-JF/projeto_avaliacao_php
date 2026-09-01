@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="<?= BASE_URL ?>/Public/css/styles.css">
   </head>
   <body>
-    Erro ao abrir pagina - <?= isset($erro) ? $erro : 'Erro Desconhecido' ?>  
+    <div class="error_container">
+      <img src="<?= BASE_URL  ?>/Public/lib/icons/error.svg" alt="Error" height="200" width="200" />
+      Erro ao abrir Página - <?= isset($erro) ? $erro : 'Erro Desconhecido' ?>  
+    </div>
   </body>
 </html>

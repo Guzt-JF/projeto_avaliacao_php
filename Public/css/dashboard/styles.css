@@ -143,8 +143,11 @@
   border-top-color: #333 !important;
 }
 
-#span_total {
+#dashboard_header {
   margin-top: 10px;
+}
+
+#span_total {
   gap: 4px;
   display: flex;
 }
@@ -170,7 +173,7 @@
 
 .row_buttons button:disabled {
   filter: brightness(80%) grayscale(30%);
-  cursor: auto;
+  cursor: not-allowed;
 }
 
 .edit_container {
