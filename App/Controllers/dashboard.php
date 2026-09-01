@@ -37,31 +37,4 @@ class Dashboard extends Controller
     }
     return $header;
   }
-
-  public function modal_edit(){
-    $this->verifyMethod('GET');
-    $service = $this->model('service');
-
-    $response = $service->get(['id' => $_GET['id']]);
-    
-    if($response['erro']){
-      $this->jsonResponse($response);
-    }
-    
-    if(!sizeof($response["data"])){
-      $this->jsonResponse(['erro' => 1, 'msg' => 'Dados não encontrados', 'data' => []]);
-    }
-
-    $modal_data = [
-      'id'          => $response["data"][0]["id_service"],
-      'price'       => number_format($response["data"][0]["price"], 2, ',', '.'),
-      'description' => $response["data"][0]["description"],
-    ];
-    
-    ob_start(); 
-    require BASE_PATH . 'App/Views/dashboard/_modal_edit.php';
-    $modal = ob_get_clean();
-
-    $this->jsonResponse(['erro' => 0, 'msg' => 'Sucesso ao retornar dados', 'data' => $modal]);
-  }
 }

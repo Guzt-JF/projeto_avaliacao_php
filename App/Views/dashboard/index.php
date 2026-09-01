@@ -8,7 +8,7 @@
      <span>Logado como:</span> 
      <span style="font-weight:600"><?= $_SESSION["username"] ?></span> 
      <div class="drawer_options">
-      <a href="<?= BASE_URL ?>/servicos/cadastro">Cadastrar Serviço</a> 
+      <button id="cad_services">Cadastrar Serviço</button> 
      </div>
   </div>
   <div class="content">

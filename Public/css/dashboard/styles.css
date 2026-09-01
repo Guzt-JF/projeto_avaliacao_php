@@ -19,10 +19,12 @@
   padding-top: 33px;
 }
 
-.drawer_options a{
-  text-decoration: none;
-  color: white;
+.drawer_options button{
+  background: none;
+  border: none;
+  font-size: 14px;
   font-weight: 600;
+  color: white;
 }
 
 .content{

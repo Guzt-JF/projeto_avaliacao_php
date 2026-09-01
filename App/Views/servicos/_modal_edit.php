@@ -11,6 +11,7 @@
 <div class="modal_background" id="modal_bg">
   <div id="modal" class="modal">
     <div class="modal_header">
+      <input hidden class="d-none" id="serv_id" value="<?= $modal_data['id'] ?>" />
       <strong>Editar Serviço N° <?= $modal_data['id'] ?></strong>
       <button id="close_modal_button">X</button>
     </div>
@@ -31,4 +32,5 @@
       <button id="modal_confirm_button" class="modal_confirm_button modal_buttons">Confirmar</button>
     </div>
   </div>
+  <script src="<?= BASE_URL ?>/Public/js/servicos/modal/edit.js"></script>
 </div>

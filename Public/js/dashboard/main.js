@@ -5,11 +5,30 @@ $(document).ready(async function(){
     await filterServices();
   })
 
+  $('#cad_services').on('click', async function(){
+    showGeneralLoading();
+
+    const response = await fetch(`${window.BASE_URL}/servicos/modal_cad`, {
+      method: 'GET',
+    });
+
+    const modal_cad = await response.json();
+
+    if(modal_cad.erro){
+      showToast(modal_cad.msg, true);
+      return;
+    }
+    
+    $('body').append(modal_cad.data);
+
+    hideGeneralLoading();
+  });
+
   $('body').on('click', '.row_edit_button', async function(){
     const serv_id = $(this).data('id');
       showGeneralLoading();
 
-    const response = await fetch(`${window.BASE_URL}/dashboard/modal_edit?id=${serv_id}`, {
+    const response = await fetch(`${window.BASE_URL}/servicos/modal_edit?id=${serv_id}`, {
       method: 'GET',
     });
 
@@ -21,52 +40,8 @@ $(document).ready(async function(){
     }
     
     $('body').append(modal_edit.data);
-    
+
     hideGeneralLoading();
-
-    $('#modal_confirm_button').on('click', async function(){
-      const new_description = $('#edit_descricao').val();
-      const new_price = $('#edit_total').val();
-
-      if(new_description.trim() == ''){
-        showToast("A descrição do produto está vazia", true);
-        return;
-      }
-      else if(new_price.trim() == ''){
-        showToast("O valor do produto está vazio", true);
-        return;
-      }
-      else if (!Number.isFinite(Number(new_price.replace(/\./g, '').replace(',', '.')))) {
-        showToast("A valor do produto é invalido", true);
-        return;
-      }
-
-      $(`#modal_bg`).remove();
-
-      showGeneralLoading();
-
-      const formData = new FormData();
-
-      formData.append('description', new_description);
-      formData.append('price', new_price);
-      formData.append('id', serv_id);
-
-      const response = await fetch(`${window.BASE_URL}/servicos/update`, {
-        method: 'POST',
-        body: formData
-      });
-
-      const data = await response.json();
-
-      showToast(data.msg, data.erro);
-      hideGeneralLoading();
-      await filterServices();
-    });
-    
-    $('#modal_cancel_button, #close_modal_button').on('click', async function(){
-      $(`#modal_bg`).remove();
-    });
-
   })
 
   $('body').on('click', '.row_delete_button', async function(){
@@ -179,5 +154,21 @@ async function updateHeaderData(){
     showToast(err.message, true);
     return;
   }
+}
+
+function verifyInputs(description, price){
+  if(description.trim() == ''){
+    showToast("A descrição do produto está vazia", true);
+    return true;
+  }
+  else if(price.trim() == ''){
+    showToast("O valor do produto está vazio", true);
+    return true;
+  }
+  else if (!Number.isFinite(Number(price.replace(/\./g, '').replace(',', '.')))) {
+    showToast("A valor do produto é invalido", true);
+    return true;
+  }
+  return false
 }
 

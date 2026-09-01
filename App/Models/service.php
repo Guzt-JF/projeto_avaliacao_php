@@ -118,10 +118,10 @@ class Service extends Database
         VALUES(:description, :price, :commission_user, :user_id_user)";
 
       $binds = [
-        ':description'    => $params['description'],
-        ':price'          => $params['price'],
-        ':commission_user' => $params['commission_user'],
-        ':user_id_user'   => $params['user_id_user'],
+        ':description'     => $params['description'],
+        ':price'           => $params['price'],
+        ':commission_user' => $params['commision'],
+        ':user_id_user'    => $_SESSION['id_user'],
       ];
 
       $query = $this->conn->prepare($sql);
@@ -150,27 +150,12 @@ class Service extends Database
       AND user_id_user = :id_user
       AND finished_at IS NULL";
 
-      $price = (float) $params['price'];
-
-      $commision_percentage = 0;
-      if($price <= 1000){
-        $commision_percentage = 5;
-      }
-      else if($price > 1000 && $price <= 10000){
-        $commision_percentage = 10;
-      }
-      else if($price > 10000){
-        $commision_percentage = 20;
-      }
-
-      $commision = $price * ($commision_percentage / 100);
-
       $binds = [
         ':id'              => $params['id'],
         ':id_user'         => $_SESSION['id_user'],
         ':description'     => $params['description'],
         ':price'           => $params['price'],
-        ':commission_user' => $commision,
+        ':commission_user' => $params['price'],
       ];
 
       $query = $this->conn->prepare($sql);
