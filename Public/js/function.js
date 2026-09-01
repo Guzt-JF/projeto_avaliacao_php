@@ -1,3 +1,8 @@
+// Script para funções gerais
+
+// Função para mostrar uma notificação no canto inferior direito da tela
+// usado para informar do resultado de uma requisição ou ação do usuário
+// é vermelho em caso de erro, e verde no caso de sucessos, 
 function showToast(message, error = false) {
   if(!error){
     $('.toast_error').removeClass('show');
@@ -34,6 +39,9 @@ function showToast(message, error = false) {
   });
 }
 
+// Função para exibir um modal simples de confirmação na tela, tendo as opções de confirmar ou cancelar
+// caso confirme vai executar a função de response e fechar o modal
+// e caso cancele vai executar a função de rejeitar e fechar o modal
 function confirmModal(title, message, response = ()=>{}, reject = ()=>{}){
   const random_id = Math.floor(Math.random() * 999999);
 
@@ -71,6 +79,8 @@ function confirmModal(title, message, response = ()=>{}, reject = ()=>{}){
   })
 }
 
+// Função para mostrar o loading que cobre toda a tela
+// Usado para impedir o usuário de interagir com a aplicação enquanto ela carrega algo 
 function showGeneralLoading(){
   $('body').append(
     `<div class="general_loading">
@@ -79,6 +89,7 @@ function showGeneralLoading(){
   `);
 }
 
+// Função para remover o loading acima
 function hideGeneralLoading(){
   $('.general_loading').remove();
 }
