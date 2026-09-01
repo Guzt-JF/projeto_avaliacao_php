@@ -23,8 +23,10 @@ class Dashboard extends Controller
     $latest_unfinished = $service->getLastThree(['finished' => false, 'id_user' => $_SESSION['id_user']]);
 
     $total_user = $service->getTotalUser(['id_user' => $_SESSION['id_user']]);
+    $total_commision = $service->getTotalCommission(['id_user' => $_SESSION['id_user']]);
 
-    $data_header['total_user'] = $total_user['data'];
+    $data_header['total_user'] = number_format($total_user['data'], 2, ',', '.');
+    $data_header['total_commission'] = number_format($total_commision['data'], 2, ',', '.');
     $data_header['latest_finished'] = $latest_finished['data'];
     $data_header['latest_unfinished'] = $latest_unfinished['data'];
     

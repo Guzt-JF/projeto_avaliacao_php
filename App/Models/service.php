@@ -112,6 +112,25 @@ class Service extends Database
     }
   }
 
+  public function getTotalCommission($params = []){
+    try{
+      $sql = "SELECT SUM(commission_user) as total FROM service s
+        WHERE user_id_user = :id
+        AND finished_at IS NOT NULL";
+
+      $query = $this->conn->prepare($sql);
+      $query->bindValue(':id', $params['id_user']);
+      $query->execute();
+
+      $data = $query->fetch(PDO::FETCH_ASSOC);
+
+      return ['erro' => 0, 'msg' => 'Sucesso ao retornar dados', 'data' => $data['total']];
+    }
+    catch(Throwable $err){
+      return ['erro' => 1, 'msg' => 'Erro ao retornar dados - '.$err->getMessage(), 'data' => 0];
+    }
+  }
+
   public function insert(array $params){
     try{
       $sql = "INSERT INTO service(description, price, commission_user, user_id_user)

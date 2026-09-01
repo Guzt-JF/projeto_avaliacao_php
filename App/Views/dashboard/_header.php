@@ -2,12 +2,14 @@
   if(!isset($data_header) || empty($data_header)){
     $data_header = [
       'total_user'        => 0,
+      'total_commission'  => 0,
       'latest_finished'   => [],
       'latest_unfinished' => [],
     ];
   }
 ?>
-  <span id="span_total"><h3>Valor Total dos serviços prestados:</h3><span>R$ <?=  number_format($data_header['total_user'], 2, ',', '.') ?></span></span>
+  <span id="span_total"><h3>Total dos serviços prestados:</h3><span>R$ <?= $data_header['total_user'] ?></span></span>
+  <span id="span_total"><h3>Total das comissões ganhas:</h3><span>R$ <?= $data_header['total_commission'] ?></span></span>
   <div class="latest_container">
     <div class="latest_div">
       <h2>Ultimos Serviços</h2>
