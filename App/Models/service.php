@@ -19,7 +19,7 @@ class Service extends Database
       $binds = [];
 
       // Script para fazer o SELECT
-      $sql = "SELECT s.*, u.name as user_name, u.email FROM service s
+      $sql = "SELECT s.*, u.name as username, u.email FROM service s
         INNER JOIN user u ON u.id_user = s.user_id_user
         WHERE 1=1";
 

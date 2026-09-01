@@ -56,7 +56,7 @@
           R$ <?= number_format($serv["price"], 2, ',', '.') ?>
         </td>
         <td>
-          <?= $serv["user_name"] ?>
+          <?= $serv["username"] ?>
         </td>
       </tr>
     <?php

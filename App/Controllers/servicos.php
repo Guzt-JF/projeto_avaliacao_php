@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 // usa o controller como extenção da clasese
 use App\Core\Controller;
+use App\Core\Mail;
 // usa Datetime para criar uma data para um filtro
 use DateTime;
 
@@ -176,20 +177,7 @@ class Servicos extends Controller
     // busca a porcentagem devida de acordo com o preço
     $price = (float) $servico["price"];
 
-    $commission_percentage = 0;
-
-    if($price <= 1000){
-      $commission_percentage = 5;
-    }
-    else if($price > 1000 && $price <= 10000){
-      $commission_percentage = 10;
-    }
-    else if($price > 10000){
-      $commission_percentage = 20;
-    }
-
-    // calcula o valor da comissão
-    $commission = $price * ($commission_percentage / 100);
+    $commission = $this->getCommission($price);
 
     // finaliza o serviço
     $servicos = $service->finish([
@@ -198,8 +186,40 @@ class Servicos extends Controller
       'commission' => $commission,
     ]);
 
+    // em caso de falha retorna uma mensagem de erro pro usuário
+    if($servicos['erro']){
+      $this->jsonResponse($servicos);
+    }
+    
+    // formata o id do serviço no padrão da table
+    $id_serv = str_pad($servico["id_service"], 7, '0', STR_PAD_LEFT);
+
+    // agrega os dados que vão ser exibidos no email
+    $data_email = [
+      'id'    => $id_serv,
+      'name'  => $servico['description'],
+      'user'  => $servico["username"],
+      'total' => number_format($commission, 2, ',', '.'),
+    ];
+
+    // Realiza o import do html do email e grava em uma variavel
+    ob_start(); 
+    require BASE_PATH . 'App/Views/emails/service_finished.php';
+    $email_html = ob_get_clean(); 
+
+    // envia um novo email
+    $mail = new Mail();
+    $result = $mail->send(
+      $servico["email"],
+      'Serviço N° ' . $id_serv . ' Concluido com Sucesso!',
+      $email_html
+    );
+
+    // caso o email não seja enviado com sucesso, anexe essa mensagem ao final do retorno pro usuário
+    $email_sent = $result['erro'] ? ' porém, o Email de notificação não foi enviado!' :'';
+
     // retorna a resposta da finalização
-    $this->jsonResponse($servicos);
+    $this->jsonResponse(['erro' => 0, 'msg' => "Serviço finalizado com sucesso" . $email_sent, 'data' => []]);
   }
 
   // função para pegar os dados da modal de edição de serviços
@@ -251,5 +271,24 @@ class Servicos extends Controller
 
     // retorna a modal
     $this->jsonResponse(['erro' => 0, 'msg' => 'Sucesso ao retornar dados', 'data' => $modal]);
+  }
+  
+  // função privada para pegar o valor da comissão
+  private function getCommission(float $price){
+    $commission_percentage = 0;
+
+    // a porcentagem depende do valor da comissão
+    if($price <= 1000){
+      $commission_percentage = 5;
+    }
+    else if($price > 1000 && $price <= 10000){
+      $commission_percentage = 10;
+    }
+    else if($price > 10000){
+      $commission_percentage = 20;
+    }
+
+    // calcula o valor da comissão
+    return $price * ($commission_percentage / 100);
   }
 }

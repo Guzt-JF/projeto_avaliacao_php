@@ -26,11 +26,11 @@ function showToast(message, error = false) {
 
   setTimeout(() => {
     toast.removeClass('show');
-  }, 3000);
+  }, 4000);
 
   setTimeout(() => {
     toast.remove();
-  }, 3200);
+  }, 4200);
   
   $('.toast_error.show').each(function () {
     $(this).removeClass('shake');
