@@ -69,27 +69,12 @@ class Servicos extends Controller
     $price = $_POST['price'] ?? '';
     $price = str_replace('.', '', $price);
     $price = (float) str_replace(',', '.', $price);
-  
-    $commision_percentage = 0;
-
-    if($price <= 1000){
-      $commision_percentage = 5;
-    }
-    else if($price > 1000 && $price <= 10000){
-      $commision_percentage = 10;
-    }
-    else if($price > 10000){
-      $commision_percentage = 20;
-    }
-
-    $commision = $price * ($commision_percentage / 100);
 
     $servicos = $service -> update([
       'id'          => $id,
       'id_user'     => $_SESSION['id_user'],
       'price'       => $price,
       'description' => $description,
-      'commision'   => $commision
     ]);
 
     $this->jsonResponse($servicos);
@@ -104,24 +89,10 @@ class Servicos extends Controller
     $price = str_replace('.', '', $price);
     $price = (float) str_replace(',', '.', $price);
   
-    $commision_percentage = 0;
-
-    if($price <= 1000){
-      $commision_percentage = 5;
-    }
-    else if($price > 1000 && $price <= 10000){
-      $commision_percentage = 10;
-    }
-    else if($price > 10000){
-      $commision_percentage = 20;
-    }
-
-    $commision = $price * ($commision_percentage / 100);
 
     $servicos = $service -> insert([
       'price'       => $price,
       'description' => $description,
-      'commision'   => $commision,
       'id_user'     => $_SESSION['id_user']
     ]);
 
@@ -147,10 +118,36 @@ class Servicos extends Controller
     $service = $this->model('service');
 
     $id = $_POST['id'] ?? '';
+    
+    $servico = $service -> get([
+      'id' => $id,
+    ]);
+    
+    if(!sizeof($servico["data"])){
+      $this->jsonResponse(['erro' => 1, 'msg' => 'Dados não encontrados', 'data' => []]);
+    }
 
-    $servicos = $service -> finish([
-      'id'      => $id,
-      'id_user' => $_SESSION['id_user']
+    $servico = $servico["data"][0];
+    $price = (float) $servico["price"];
+
+    $commission_percentage = 0;
+
+    if($price <= 1000){
+      $commission_percentage = 5;
+    }
+    else if($price > 1000 && $price <= 10000){
+      $commission_percentage = 10;
+    }
+    else if($price > 10000){
+      $commission_percentage = 20;
+    }
+
+    $commission = $price * ($commission_percentage / 100);
+
+    $servicos = $service->finish([
+      'id'         => $id,
+      'id_user'    => $_SESSION['id_user'],
+      'commission' => $commission,
     ]);
 
     $this->jsonResponse($servicos);

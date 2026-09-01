@@ -11,7 +11,7 @@ class Service extends Database
     try{
       $binds = [];
 
-      $sql = "SELECT s.*, u.name as user_name FROM service s
+      $sql = "SELECT s.*, u.name as user_name, u.email FROM service s
         INNER JOIN user u ON u.id_user = s.user_id_user
         WHERE 1=1";
 
@@ -112,7 +112,7 @@ class Service extends Database
     }
   }
 
-  public function getTotalCommission($params = []){
+  public function getTotalcommission($params = []){
     try{
       $sql = "SELECT SUM(commission_user) as total FROM service s
         WHERE user_id_user = :id
@@ -133,13 +133,12 @@ class Service extends Database
 
   public function insert(array $params){
     try{
-      $sql = "INSERT INTO service(description, price, commission_user, user_id_user)
-        VALUES(:description, :price, :commission_user, :user_id_user)";
+      $sql = "INSERT INTO service(description, price, user_id_user)
+        VALUES(:description, :price, :user_id_user)";
 
       $binds = [
         ':description'     => $params['description'],
         ':price'           => $params['price'],
-        ':commission_user' => $params['commision'],
         ':user_id_user'    => $params['id_user'],
       ];
 
@@ -163,8 +162,7 @@ class Service extends Database
     try{
       $sql = "UPDATE service
       SET description = :description,
-      price = :price,
-      commission_user = :commission_user
+      price = :price
       WHERE id_service = :id
       AND user_id_user = :id_user
       AND finished_at IS NULL";
@@ -174,7 +172,6 @@ class Service extends Database
         ':id_user'         => $params['id_user'],
         ':description'     => $params['description'],
         ':price'           => $params['price'],
-        ':commission_user' => $params['price'],
       ];
 
       $query = $this->conn->prepare($sql);
@@ -199,14 +196,16 @@ class Service extends Database
   public function finish(array $params){
     try{
       $sql = "UPDATE service
-      SET finished_at = now()
+      SET finished_at = now(),
+      commission_user = :commission_user
       WHERE id_service = :id
       AND user_id_user = :id_user
       AND finished_at IS NULL";
 
       $binds = [
-        ':id'      => $params['id'],
-        ':id_user' => $params['id_user'],
+        ':id'              => $params['id'],
+        ':id_user'         => $params['id_user'],
+        ':commission_user' => $params['commission'],
       ];
 
       $query = $this->conn->prepare($sql);
