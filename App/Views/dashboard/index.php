@@ -1,12 +1,16 @@
 <?php 
   if(!isset($data)){
-    $data = ['header'=>''];
+    $data = [
+      'header'  => '',
+      'user'    => '',
+      'id_user' => ''
+    ];
   }
 ?>
 <div class="main_container">
   <div class="drawer_container">
      <span>Logado como:</span> 
-     <span style="font-weight:600"><?= $_SESSION["username"] ?></span> 
+     <span style="font-weight:600"><?= $data["user"] ?></span> 
      <div class="drawer_options">
       <button id="cad_services">Cadastrar Serviço</button> 
      </div>
@@ -24,7 +28,7 @@
       </div>
       <div class="input_container">
         <label>Nome Usuário:</label>
-        <input type="text" id="filter_nome_usuario" value="<?= $_SESSION["username"] ?>"/>
+        <input type="text" id="filter_nome_usuario" value="<?= $data["user"] ?>"/>
       </div>
       <div class="input_container">
         <label>Status:</label>

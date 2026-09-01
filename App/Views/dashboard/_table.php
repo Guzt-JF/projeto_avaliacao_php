@@ -1,3 +1,12 @@
+<?php 
+  if(!isset($data)){
+    $data = [
+      'header'  => '',
+      'user'    => '',
+      'id_user' => ''
+    ];
+  }
+?>
 <div class="loading_container d-none" id="loading_table">
   <div class="panel_loading loading"></div>
 </div>
@@ -18,7 +27,7 @@
       foreach($servicos_data as $serv){
         $id = $serv["id_service"];
         $status = isset($serv["finished_at"]) && !empty($serv["finished_at"]);
-        $editable = ($status || $serv["user_id_user"] != $_SESSION['id_user']);
+        $editable = ($status || $serv["user_id_user"] != $data['id_user']);
     ?>
       <tr>
         <td>

@@ -81,7 +81,7 @@ class Service extends Database
 
       $query = $this->conn->prepare($sql);
       
-      $query->bindValue(':id', $_SESSION['id_user']);
+      $query->bindValue(':id', $params['id_user']);
 
       $query->execute();
       $servicos = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -93,14 +93,14 @@ class Service extends Database
     }
   }
 
-  public function getTotalUser(){
+  public function getTotalUser($params = []){
     try{
       $sql = "SELECT SUM(price) as total FROM service s
         WHERE user_id_user = :id
         AND finished_at IS NOT NULL";
 
       $query = $this->conn->prepare($sql);
-      $query->bindValue(':id', $_SESSION['id_user']);
+      $query->bindValue(':id', $params['id_user']);
       $query->execute();
 
       $data = $query->fetch(PDO::FETCH_ASSOC);
@@ -121,7 +121,7 @@ class Service extends Database
         ':description'     => $params['description'],
         ':price'           => $params['price'],
         ':commission_user' => $params['commision'],
-        ':user_id_user'    => $_SESSION['id_user'],
+        ':user_id_user'    => $params['id_user'],
       ];
 
       $query = $this->conn->prepare($sql);
@@ -152,7 +152,7 @@ class Service extends Database
 
       $binds = [
         ':id'              => $params['id'],
-        ':id_user'         => $_SESSION['id_user'],
+        ':id_user'         => $params['id_user'],
         ':description'     => $params['description'],
         ':price'           => $params['price'],
         ':commission_user' => $params['price'],
@@ -187,7 +187,7 @@ class Service extends Database
 
       $binds = [
         ':id'      => $params['id'],
-        ':id_user' => $_SESSION['id_user'],
+        ':id_user' => $params['id_user'],
       ];
 
       $query = $this->conn->prepare($sql);
@@ -218,7 +218,7 @@ class Service extends Database
 
       $binds = [
         ':id'      => $params['id'],
-        ':id_user' => $_SESSION['id_user'],
+        ':id_user' => $params['id_user'],
       ];
 
       $query = $this->conn->prepare($sql);

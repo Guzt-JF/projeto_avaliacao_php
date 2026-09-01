@@ -13,16 +13,16 @@ class Dashboard extends Controller
     }
 
     $header = $this->get_header_data(false);
-    $this->view('dashboard/index', ['header'=>$header]);
+    $this->view('dashboard/index', ['header' => $header, 'user' => $_SESSION["username"], 'id_user' => $_SESSION['id_user']]);
   }
 
   public function get_header_data($to_return = true){
     $service = $this->model('service');
 
-    $latest_finished = $service->getLastThree(['finished' => true]);
-    $latest_unfinished = $service->getLastThree(['finished' => false]);
+    $latest_finished = $service->getLastThree(['finished' => true, 'id_user' => $_SESSION['id_user']]);
+    $latest_unfinished = $service->getLastThree(['finished' => false, 'id_user' => $_SESSION['id_user']]);
 
-    $total_user = $service->getTotalUser();
+    $total_user = $service->getTotalUser(['id_user' => $_SESSION['id_user']]);
 
     $data_header['total_user'] = $total_user['data'];
     $data_header['latest_finished'] = $latest_finished['data'];

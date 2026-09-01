@@ -51,6 +51,7 @@ class Servicos extends Controller
       $this->jsonResponse($servicos_data);
     }
     $servicos_data = $servicos_data['data'];
+    $data = ['id_user' => $_SESSION['id_user']];
 
     ob_start(); 
     require BASE_PATH . 'App/Views/dashboard/_table.php';
@@ -85,6 +86,7 @@ class Servicos extends Controller
 
     $servicos = $service -> update([
       'id'          => $id,
+      'id_user'     => $_SESSION['id_user'],
       'price'       => $price,
       'description' => $description,
       'commision'   => $commision
@@ -119,7 +121,8 @@ class Servicos extends Controller
     $servicos = $service -> insert([
       'price'       => $price,
       'description' => $description,
-      'commision'   => $commision
+      'commision'   => $commision,
+      'id_user'     => $_SESSION['id_user']
     ]);
 
     $this->jsonResponse($servicos);
@@ -132,7 +135,8 @@ class Servicos extends Controller
     $id = $_POST['id'] ?? '';
 
     $servicos = $service -> delete([
-      'id' => $id,
+      'id'      => $id,
+      'id_user' => $_SESSION['id_user']
     ]);
 
     $this->jsonResponse($servicos);
@@ -145,7 +149,8 @@ class Servicos extends Controller
     $id = $_POST['id'] ?? '';
 
     $servicos = $service -> finish([
-      'id' => $id,
+      'id'      => $id,
+      'id_user' => $_SESSION['id_user']
     ]);
 
     $this->jsonResponse($servicos);
