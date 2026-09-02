@@ -2,14 +2,14 @@
 
 ## Resumo
 
--   [Sobre](##Sobre)
--   [Stack](##Stack)
--   [Instalação](##Instalação)
-	- [Clonar o projeto](###1.-Clonar-o-projeto)
-	- [Configuração do servidor](###2.-Configuração-do-servidor)
-	- [Configuração do banco de dados](###3.-Configuração-do-banco-de-dados)
-	- [Configuração do envio de e-mails](###4.-Configuração-do-envio-de-e-mails)
-	- [Executando o projeto](###5.-Executando-o-projeto)
+-   [Sobre](#Sobre)
+-   [Stack](#Stack)
+-   [Instalação](#Instalação)
+	- [Clonar o projeto](#1-Clonar-o-projeto)
+	- [Configuração do servidor](#2-Configuração-do-servidor)
+	- [Configuração do banco de dados](#3-Configuração-do-banco-de-dados)
+	- [Configuração do envio de e-mails](#4-Configuração-do-envio-de-e-mails)
+	- [Executando o projeto](#5-Executando-o-projeto)
 -   [Descrição Original](#Descrição-Original)
 
 
@@ -210,6 +210,3 @@ Então não deve cadastrar o novo serviço mostrando mensagem de falha redirecio
 
 
 Boa sorte!!
-
-
-
