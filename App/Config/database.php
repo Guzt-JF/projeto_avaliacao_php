@@ -1,8 +1,9 @@
 <?php 
+// Credenciais para conectar no banco, substitua de acordo com a sua conexão
 return [
-  'port'     => '',
-  'host'     => '',
-  'dbname'   => '',
-  'username' => '',
+  'host'     => 'localhost',
+  'dbname'   => 'projeto_avaliacao',
+  'username' => 'root',
   'password' => '',
+  'port'     => 3306
 ];
