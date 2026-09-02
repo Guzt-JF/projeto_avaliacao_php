@@ -47,7 +47,7 @@ class Mail
       // define o email e o nome do remetente
       $mail->setFrom(
         $config['email'],
-        $config['appname']
+        $config['sender_name']
       );
 
       // define o endereço de email a ser enviado
