@@ -4,7 +4,10 @@ namespace App\Controllers;
 
 // usa o controller como extenção da clasese
 use App\Core\Controller;
+
+// usa o controller como extenção da clasese
 use App\Core\Mail;
+
 // usa Datetime para criar uma data para um filtro
 use DateTime;
 
