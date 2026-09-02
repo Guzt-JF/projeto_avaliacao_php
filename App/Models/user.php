@@ -12,6 +12,14 @@ use Throwable;
 // Classe para fazer requisições pra tabela de Usuários
 class User extends Database
 {
+  public function __construct()
+  {
+    parent::__construct();
+    // Verifica se a conexão com o banco foi estabelecida, caso não, retorna a conn vazia
+    if($this->conn == null){
+      return;
+    }
+  }
   // função para pegar os dados por email
   public function getByEmail(array $params){
     try{

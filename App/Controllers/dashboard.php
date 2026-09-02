@@ -29,6 +29,19 @@ class Dashboard extends Controller
     // Importa a model de service
     $service = $this->model('service');
 
+    // Verifica se a conexão com o banco foi estabelecida, caso não retorna um erro
+    if($service->conn == null){
+      if($to_return){
+        $this->jsonResponse(['erro' => 1, 'msg'=> 'Erro ao Conectar no banco de dados, verifique suas credenciais e o servidor', 'data' => []]);
+      }
+      else{
+        $erro = 'Não foi possivel conectar com o servidor';
+        require_once BASE_PATH . '/Public/404.php';
+        exit;
+      }
+    }
+
+
     // Pega os 3 ultimos serviços finalizados 
     $latest_finished = $service->getLastThree(['finished' => true, 'id_user' => $_SESSION['id_user']]);
     // Pega os 3 ultimos serviços pendentes 

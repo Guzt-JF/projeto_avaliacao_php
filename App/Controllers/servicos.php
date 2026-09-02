@@ -24,6 +24,11 @@ class Servicos extends Controller
     // Importa a model de service
     $service = $this->model('service');
 
+    // Verifica se a conexão com o banco foi estabelecida, caso não retorna um erro
+    if($service->conn == null){
+      $this->jsonResponse(['erro' => 1, 'msg'=> 'Erro ao Conectar no banco de dados, verifique suas credenciais e o servidor', 'data' => []]);
+    }
+
     // armazena os valroes a ser usadoss e garante q os valores existam, mesmo q estejam vazios
     $username = $_GET['username'] ?? '';
     $description = $_GET['description'] ?? '';
@@ -89,6 +94,11 @@ class Servicos extends Controller
     // Importa a model de service
     $service = $this->model('service');
 
+    // Verifica se a conexão com o banco foi estabelecida, caso não retorna um erro
+    if($service->conn == null){
+      $this->jsonResponse(['erro' => 1, 'msg'=> 'Erro ao Conectar no banco de dados, verifique suas credenciais e o servidor', 'data' => []]);
+    }
+
     // armazena os valroes a ser usadoss e garante q os valores existam, mesmo q estejam vazios
     $id = $_POST['id'] ?? '';
     $description = $_POST['description'] ?? '';
@@ -116,6 +126,11 @@ class Servicos extends Controller
     // Importa a model de service
     $service = $this->model('service');
 
+    // Verifica se a conexão com o banco foi estabelecida, caso não retorna um erro
+    if($service->conn == null){
+      $this->jsonResponse(['erro' => 1, 'msg'=> 'Erro ao Conectar no banco de dados, verifique suas credenciais e o servidor', 'data' => []]);
+    }
+
     // armazena os valroes a ser usadoss e garante q os valores existam, mesmo q estejam vazios
     $description = $_POST['description'] ?? '';
     $price = $_POST['price'] ?? '';
@@ -140,6 +155,11 @@ class Servicos extends Controller
     $this->verifyMethod('POST');
     // Importa a model de service
     $service = $this->model('service');
+    
+    // Verifica se a conexão com o banco foi estabelecida, caso não retorna um erro
+    if($service->conn == null){
+      $this->jsonResponse(['erro' => 1, 'msg'=> 'Erro ao Conectar no banco de dados, verifique suas credenciais e o servidor', 'data' => []]);
+    }
 
     // armazena os valroes a ser usadoss e garante q os valores existam, mesmo q estejam vazios
     $id = $_POST['id'] ?? '';
@@ -160,6 +180,11 @@ class Servicos extends Controller
     $this->verifyMethod('POST');
     // Importa a model de service
     $service = $this->model('service');
+    
+    // Verifica se a conexão com o banco foi estabelecida, caso não retorna um erro
+    if($service->conn == null){
+      $this->jsonResponse(['erro' => 1, 'msg'=> 'Erro ao Conectar no banco de dados, verifique suas credenciais e o servidor', 'data' => []]);
+    }
 
     // armazena os valroes a ser usadoss e garante q os valores existam, mesmo q estejam vazios
     $id = $_POST['id'] ?? '';
@@ -231,6 +256,11 @@ class Servicos extends Controller
     $this->verifyMethod('GET');
     // Importa a model de service
     $service = $this->model('service');
+    
+    // Verifica se a conexão com o banco foi estabelecida, caso não retorna um erro
+    if($service->conn == null){
+      $this->jsonResponse(['erro' => 1, 'msg'=> 'Erro ao Conectar no banco de dados, verifique suas credenciais e o servidor', 'data' => []]);
+    }
 
     $response = $service->get(['id' => $_GET['id']]);
     
@@ -266,6 +296,11 @@ class Servicos extends Controller
     $this->verifyMethod('GET');
     // Importa a model de service
     $service = $this->model('service');
+    
+    // Verifica se a conexão com o banco foi estabelecida, caso não retorna um erro
+    if($service->conn == null){
+      $this->jsonResponse(['erro' => 1, 'msg'=> 'Erro ao Conectar no banco de dados, verifique suas credenciais e o servidor', 'data' => []]);
+    }
 
     // Realiza o import da modal e grava em uma variavel
     ob_start(); 

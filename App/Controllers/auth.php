@@ -32,6 +32,11 @@ class Auth extends Controller
     // Importa a model de usuário
     $user_model = $this->model('user');
 
+    // Verifica se a conexão com o banco foi estabelecida, caso não retorna um erro
+    if($user_model->conn == null){
+      $this->jsonResponse(['erro' => 1, 'msg'=> 'Erro ao Conectar no banco de dados, verifique suas credenciais e o servidor', 'data' => []]);
+    }
+
     // Filtra o campo de email
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $password = $_POST['password'];
@@ -81,6 +86,12 @@ class Auth extends Controller
 
     // Importa a model de usuário
     $user_model = $this->model('user');
+
+    // Verifica se a conexão com o banco foi estabelecida, caso não retorna um erro
+    if($user_model->conn == null){
+      $this->jsonResponse(['erro' => 1, 'msg'=> 'Erro ao Conectar no banco de dados, verifique suas credenciais e o servidor', 'data' => []]);
+    }
+
     $username = $_POST['username'];
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $password = $_POST['password'];

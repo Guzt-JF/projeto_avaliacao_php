@@ -6,8 +6,8 @@ namespace App\Core;
 // usa o PDO para estabelece a conexão com o banco de dados e fazer as requisições
 use PDO;
 
-// usa o PDOException para capturar erros da conexão com o banco de dados
-use PDOException;
+// usa o Throwable para capturar erros da conexão com o banco de dados
+use Throwable;
 
 // clase de database, basicamente cuida da conexão com o banco de dados do sistema
 class Database {
@@ -23,9 +23,9 @@ class Database {
       $this->conn = new PDO("mysql:host=".$config['host'].";port=".$config['port'].";dbname=".$config['dbname'], $config['username'], $config['password']);
       // Configura o banco para lançar um erro em caso de falha da requisição
       $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (PDOException $e) {
-      // retorna mensagem de erro em caso de falha na conexão com o banco de dados
-      echo 'Erro ao Conectar no banco de dados: ' . $e->getMessage();
+    } catch (Throwable $e) {
+      // retorna a conexão vazia em caso de erro
+      $this->conn = null;
     }
   }
 }

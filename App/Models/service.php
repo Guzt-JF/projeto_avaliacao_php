@@ -12,6 +12,14 @@ use Throwable;
 // Classe para fazer requisições pra tabela de serviços
 class Service extends Database
 {
+  public function __construct()
+  {
+    parent::__construct();
+    // Verifica se a conexão com o banco foi estabelecida, caso não, retorna a conn vazia
+    if($this->conn == null){
+      return;
+    }
+  }
   // função para pegar os dados num geral
   public function get(array $params){
     try{
